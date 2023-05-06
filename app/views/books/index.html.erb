@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="../../assets/stylesheets/books.scss" />
-  </head>
-<body>
-  <p id="notice"></p>
-  <h1>Books</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>body</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-  <h2>new book</h2>
-  <form cass="new_book" id="new_book" action="/books"
-  accept-charse="UTF-8" method="post">
-  </form>
-</body>
-</html>
+<h1>Books</h1>
+<% @books.each do |book| %>
+<table>
+ <tr>
+  <th>Title</th>
+  <th>Boby</th>
+  <span>
+  <%= link_to book.title, book_path(book.id) %>
+  </span>
+  <span>
+  <%= link_to book.body, book_path(book.id) %>
+  </span>
+ </tr>
+</table>
+
+<% end %>
+  
+<h2>new book</h2>
+<%= form_with model: @book,url:'/books',method: :post do |f| %>
+
+ <h4>title</h4>
+ <%= f.text_field :title %>
+ 
+ <h4>body</h4>
+ <%= f.text_area :body %>
+ 
+ <%= f.submit 'Create Book' %>
+<% end %>
